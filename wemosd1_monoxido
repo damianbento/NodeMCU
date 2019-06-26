@@ -1,0 +1,40 @@
+#define BLYNK_PRINT Serial
+#include <ESP8266WiFi.h>
+#include <BlynkSimpleEsp8266.h>
+#include <SimpleTimer.h>  
+SimpleTimer timer;
+char auth[] = "4083dc1078a1417f81ed0c64cbf34325";
+char ssid[] = "sn-t";
+char pass[] = "Mariela04021976";
+const int AOUTpin=0;
+const int DOUTpin=2;
+int limit;
+int value;
+
+void setup()
+{
+    Serial.begin(9600);
+    Blynk.begin(auth, ssid, pass);
+    pinMode(DOUTpin, INPUT);
+    timer.setInterval(2000, sendUptime);
+}
+
+void loop()
+{
+  Blynk.run();
+  timer.run();
+}
+
+void sendUptime()
+{
+  value= analogRead(AOUTpin);
+  limit= digitalRead(DOUTpin); 
+
+
+  Serial.println("nivel co:");
+  Serial.println(value);
+  Serial.println("Limit: ");
+  Serial.print(limit); 
+  Blynk.virtualWrite(V5, value);
+  Blynk.virtualWrite(V1, limit); 
+}
