@@ -1,0 +1,49 @@
+#include "U8glib.h"
+
+// Constructor especifico para el display utilizado
+// =================================================
+//U8GLIB_SH1106_128X64 u8g(U8G_I2C_OPT_NONE); // I2C / TWI
+//U8GLIB_SH1106_128X64 u8g(U8G_I2C_OPT_DEV_0|U8G_I2C_OPT_FAST); // Dev 0, Fast I2C / TWI
+U8GLIB_SH1106_128X64 u8g(U8G_I2C_OPT_NO_ACK); // Display which does not send ACK
+
+
+int X_pos = 0; // posicion inicial scroll
+
+
+void setup() {
+
+// u8g.setFont(u8g_font_unifont); // Selecciona tipo letra
+// u8g.setColorIndex(1); // Pixel on. 
+
+// u8g.setRot180(); // flip screen
+}
+//============================================================
+void loop(void) {
+
+// ############## Inicio "picture loop" ####### 
+ u8g.firstPage(); 
+ do { 
+ draw();
+ } while( u8g.nextPage() ); 
+// ############## Fin "picture loop" ########## 
+
+ if(X_pos > -250){ // posicion horizontal scroll 
+ X_pos--; 
+ } else{ X_pos = 0; } // cuando esta fuera de pantalla se inicia
+ 
+}
+//============================================================
+
+void draw(void) {
+
+ u8g.setFont(u8g_font_unifont);
+ u8g.drawStr( X_pos, 15, " I2C Display OLED 1.3' 128x64"); // Scroll horizontal
+ u8g.drawLine(0, 18, 127, 18); // linea separacion
+
+ u8g.setFont(u8g_font_osb18); // cambio tipo de letra
+ u8g.drawStr( 12, 44, "SH1106"); 
+
+ u8g.setFont(u8g_font_5x7);
+// u8g.setFont(u8g_font_9x15);
+ u8g.drawStr( 0, 62, "www.playbyte.es"); 
+}
