@@ -10,9 +10,9 @@ U8G2_SH1106_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
 
 DHT dht(dht_dpin, DHTTYPE); 
 SimpleTimer timer;
-char auth[] = "4083dc1078a1417f81ed0c64cbf34325";
+char auth[] = "*******************************";
 char ssid[] = "sn-t";
-char pass[] = "Mariela04021976";
+char pass[] = "***************";
 float t;
 float h;
 
