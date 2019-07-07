@@ -3,9 +3,9 @@
 #include <BlynkSimpleEsp8266.h>
 #include <SimpleTimer.h>  
 SimpleTimer timer;
-char auth[] = "4083dc1078a1417f81ed0c64cbf34325";
+char auth[] = "**********************************";
 char ssid[] = "sn-t";
-char pass[] = "Mariela04021976";
+char pass[] = "***********************";
 const int AOUTpin=0;
 const int DOUTpin=2;
 int limit;
