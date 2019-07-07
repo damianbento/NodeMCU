@@ -16,9 +16,9 @@ float dst,bt,bp,ba;
 char dstmp[20],btmp[20],bprs[20],balt[20];
 bool bmp085_present=true;
 
-char auth[] = "077cf0bbbd3f4179900f4709f7c28aac";
+char auth[] = "*****************************";
 char ssid[] = "sn-t";
-char pass[] = "Mariela04021976";
+char pass[] = "*************************";
 #define DHTPIN 2
 #define DHTTYPE DHT11
 DHT dht(DHTPIN, DHTTYPE); //Defining the pin and the dhttype
