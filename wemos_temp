@@ -7,9 +7,9 @@
 #define dht_dpin D4
 DHT dht(dht_dpin, DHTTYPE); 
 SimpleTimer timer;
-char auth[] = "077cf0bbbd3f4179900f4709f7c28aac";
+char auth[] = "*****************************";
 char ssid[] = "sn-t";
-char pass[] = "Mariela04021976";
+char pass[] = "********************";
 float t;
 float h;
 
