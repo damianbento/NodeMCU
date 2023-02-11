@@ -1,11 +1,12 @@
 #include <U8g2lib.h>
-#include <DHT.h>
+#include "DHT.h"
 #include <ESP8266WiFi.h>
 #include <SimpleTimer.h> 
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BMP280.h>
 #define DHTTYPE DHT11
-#define dht_dpin 4
+#define dht_dpin 2
+float temppro = 0;
 
 U8G2_SH1106_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
 DHT dht(dht_dpin, DHTTYPE); 
@@ -98,18 +99,19 @@ void loop()
 h = dht.readHumidity();
 float t = dht.readTemperature(); 
 int tem = temperatura;
-//int hum = h;
+int hum = h;
   temperatura = bmp.readTemperature();
   presion = bmp.readPressure()/100;
+  temppro = (t + temperatura) / 2;
 
   u8g2.firstPage();
   u8g2.clearBuffer();
   //u8g2.clearDisplay();
   u8g2.setFont(u8g2_font_inb38_mf);  // choose a suitable font
   u8g2.setCursor(3,55);
-  u8g2.print(tem);
+  u8g2.print(temppro);
   u8g2.setFont(u8g2_font_inb19_mf);
-  u8g2.setCursor(67,55);
+  u8g2.setCursor(68,55);
   u8g2.print("C");
   u8g2.drawUTF8(83, 45, DEGREE_SYMBOL);
   u8g2.drawXBMP( 100, 10, Temperature_20Icon_width, Temperature_20Icon_height, Temperature_20Icon_bits);
@@ -117,9 +119,9 @@ int tem = temperatura;
   delay(4000);
 
 
-/*
+
   u8g2.clearBuffer();
-//u8g2.sendBuffer();
+u8g2.sendBuffer();
 u8g2.clearDisplay();    
     u8g2.setFont(u8g2_font_inb38_mf);  // choose a suitable font
     u8g2.setCursor(3,55);
@@ -131,7 +133,7 @@ u8g2.clearDisplay();
     u8g2.drawXBMP( 90, 10, hum_width, hum_height, hum_bits);
    u8g2.sendBuffer();
 delay(4000);
-*/
+
 // start print press
 u8g2.clearBuffer();
 u8g2.sendBuffer(); 
@@ -148,6 +150,8 @@ u8g2.clearDisplay();
 delay(4000);
 // end print press
 
+
+
 Serial.println("Humidity and temperature\n\n");
   Serial.print("Current humidity = ");
   Serial.print(h);
@@ -158,6 +162,8 @@ Serial.println("Humidity and temperature\n\n");
   Serial.print(presion);
   Serial.print("temperature1 = ");
   Serial.print(temperatura);
+  Serial.println("TempPromedio=");
+  Serial.print(temppro);
 
 
 }
